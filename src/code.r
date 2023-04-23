@@ -4,15 +4,12 @@
 
 # Names: 
 print("The names of this group are the following.")
-print("Add Your Name Here")
-print("Add Your Name Here")
-print("Add Your Name Here")
-print("Add Your Name Here")
+print("Truong Son Nguyen")
 
 ################################################
 
 print("The name of this group is the following.")
-print("Add Your Name Here")
+print("Political Polling")
 
 rm(list = ls()) # clear out the variables
 # from memory to make a clean execution of the code.
