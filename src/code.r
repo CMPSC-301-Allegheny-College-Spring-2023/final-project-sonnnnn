@@ -35,12 +35,9 @@ library(car)
 library(foreign)
 library(haven)
 ##### Begin by loading your csv file.
-fname <- file.choose()
-data <- read.table(file.choose(), header = TRUE, sep = ",")
-
+newanes <- read_sav("Documents/GitHub/final-project-sonnnnn/data/anes_timeseries_2020_spss_20220210 (1)/anes_timeseries_2020_spss_20220210.sav")
 # View the data set.
-
-View(data)
+View(newanes)
 
 # Add your code here to address the four main research questions which are noted in the README.md file. 
 
