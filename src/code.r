@@ -31,7 +31,9 @@ cat("\014") # clear the console
 
 library(dplyr)
 library(tidyverse)
-
+library(car)
+library(foreign)
+library(haven)
 ##### Begin by loading your csv file.
 fname <- file.choose()
 data <- read.table(file.choose(), header = TRUE, sep = ",")
