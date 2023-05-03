@@ -39,9 +39,13 @@ newanes <- read_sav("~/Documents/GitHub/final-project-sonnnnn/data/anes_timeseri
 # View the data set.
 View(newanes)
 
-# Add your code here to address the four main research questions which are noted in the README.md file. 
+# View original data on some of the relevant variables
+table(newanes$V201377) # media trust
+table(newanes$V201231x) # party id
+table(newanes$V201033) # how ppl intend to vote in presidential election
 
-# TODO
+
+
 
 ################################################
 
