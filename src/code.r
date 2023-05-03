@@ -43,9 +43,14 @@ View(newanes)
 table(newanes$V201377) # media trust
 table(newanes$V201231x) # party id
 table(newanes$V201033) # how ppl intend to vote in presidential election
+table(newanes$V201124) # how ppl feel about Congress
+table(newanes$V201127) # how ppl feel about the president
+table(newanes$V201237) # how often can ppl trust others
+
+#
 
 
 
 
-################################################
+###############################################
 
