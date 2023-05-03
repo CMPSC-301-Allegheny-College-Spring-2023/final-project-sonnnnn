@@ -47,10 +47,22 @@ table(newanes$V201124) # how ppl feel about Congress
 table(newanes$V201127) # how ppl feel about the president
 table(newanes$V201237) # how often can ppl trust others
 
-#
+# get relavant data in a new subset
+relevantdata <- subset(newanes, select = c(V201377,V201231x, V201033, V201124, V201127, V201237))
+
+# rename the variables
+names(relevantdata)[names(relevantdata) == 'V201377'] <- 'Media Trust'
+names(relevantdata)[names(relevantdata) == 'V201231x'] <- 'Party ID'
+names(relevantdata)[names(relevantdata) == 'V201033'] <- 'Presidential Candidate' 
+names(relevantdata)[names(relevantdata) == 'V201124'] <- 'Congress Approval' 
+names(relevantdata)[names(relevantdata) == 'V201127'] <- 'President Approval'
+names(relevantdata)[names(relevantdata) == 'V201237'] <- 'Trust among Citizens'
+
+# 
 
 
 
 
-###############################################
+
+##############################################
 
