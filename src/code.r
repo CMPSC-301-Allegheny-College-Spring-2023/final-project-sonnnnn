@@ -35,20 +35,17 @@ library(car)
 library(foreign)
 library(haven)
 ##### Begin by loading your csv file.
-newanes <- read_sav("~/Documents/GitHub/final-project-sonnnnn/data/anes_timeseries_2020_spss_20220210 (1)/anes_timeseries_2020_spss_20220210.sav")
+relevantdata <- subset(read_sav("~/Documents/GitHub/final-project-sonnnnn/data/anes_timeseries_2020_spss_20220210 (1)/anes_timeseries_2020_spss_20220210.sav"), select = c(V201377,V201231x, V201033, V201124, V201127, V201237))
 # View the data set.
-View(newanes)
+View(relevantdata)
 
 # View original data on some of the relevant variables
-table(newanes$V201377) # media trust
-table(newanes$V201231x) # party id
-table(newanes$V201033) # how ppl intend to vote in presidential election
-table(newanes$V201124) # how ppl feel about Congress
-table(newanes$V201127) # how ppl feel about the president
-table(newanes$V201237) # how often can ppl trust others
-
-# get relavant data in a new subset
-relevantdata <- subset(newanes, select = c(V201377,V201231x, V201033, V201124, V201127, V201237))
+table(relevantdata$V201377) # media trust
+table(relevantdata$V201231x) # party id
+table(relevantdata$V201033) # how ppl intend to vote in presidential election
+table(relevantdata$V201124) # how ppl feel about Congress
+table(relevantdata$V201127) # how ppl feel about the president
+table(relevantdata$V201237) # how often can ppl trust others
 
 # rename the variables
 names(relevantdata)[names(relevantdata) == 'V201377'] <- 'MediaTrust'
@@ -75,6 +72,14 @@ relevantdata$TrustamongCitizens<-recode(relevantdata$TrustamongCitizens,"1='Alwa
 # removing the NA values
 relevantdata<-na.omit(relevantdata)
 
+# view data after recoding
+table(relevantdata$MediaTrust) # media trust
+table(relevantdata$PartyID) # party id
+table(relevantdata$PresidentialCandidate) # how ppl intend to vote in presidential election
+table(relevantdata$CongressApproval) # how ppl feel about Congress
+table(relevantdata$PresidentApproval) # how ppl feel about the president
+table(relevantdata$TrustamongCitizens) # how often can ppl trust others
+                     
 # create order for variables so that charts look better
 relevantdata$PartyID<-factor(relevantdata$PartyID, levels = c("Strong Dem", "Dem", "Weak Dem", "Independent","Weak Rep","Rep","Strong Rep"))
 relevantdata$MediaTrust<-factor(relevantdata$MediaTrust, levels = c("A great deal","A lot","A moderate amount","A little","None"))
@@ -119,7 +124,7 @@ ggplot(PartyIDxMediaTrust, aes(x = PartyID, y = percentage, fill = MediaTrust)) 
 ggplot(PartyIDxCongressApproval, aes(x = PartyID, y = percentage, fill = CongressApproval)) +
           geom_col(position = "fill") +
           labs(x = "Party ID", y = "Percentage", fill = "Congress Approval") +
-          ggtitle("Percentage Stacked Bar Chart of Media Trust and Party ID") +
+          ggtitle("Percentage Stacked Bar Chart of Congress Approval and Party ID") +
           theme_minimal()
 # PartyIDxPresidentApproval
 ggplot(PartyIDxPresidentApproval, aes(x = PartyID, y = percentage, fill = PresidentApproval)) +
@@ -139,6 +144,18 @@ ggplot(PartyIDxTrustamongCitizens, aes(x = PartyID, y = percentage, fill = Trust
      labs(x = "Party ID", y = "Percentage", fill = "Trust Among Citizens") +
      ggtitle("Percentage Stacked Bar Chart of Trust Among Citizens and Party ID") +
      theme_minimal()
-#
-###################################
 
+# Performing regression analysis
+# Party ID and Media Trust
+relevantdata$PartyID_num <- as.numeric(relevantdata$PartyID)
+relevantdata$MediaTrust_num <- as.numeric(relevantdata$MediaTrust)
+PartyIDxMediaTrustReg <- lm(MediaTrust_num ~ PartyID_num, data = relevantdata)
+summary(PartyIDxMediaTrustReg)
+# Party ID and Presidential candidate
+relevantdata$PresidentialCandidate_num <- as.numeric(relevantdata$PresidentialCandidate)
+PartyIDxPresidentialCandidateReg <- lm(PresidentialCandidate_num ~ PartyID_num, data = relevantdata)
+summary(PartyIDxPresidentialCandidateReg)
+# Party ID and Trust among citizens
+relevantdata$TrustamongCitizens_num <- as.numeric(relevantdata$TrustamongCitizens)
+PartyIDxTrustamongCitizensReg <- lm(TrustamongCitizens_num ~ PartyID_num, data = relevantdata)
+summary(PartyIDxTrustamongCitizensReg)
