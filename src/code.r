@@ -124,7 +124,7 @@ ggplot(PartyIDxMediaTrust, aes(x = PartyID, y = percentage, fill = MediaTrust)) 
 ggplot(PartyIDxCongressApproval, aes(x = PartyID, y = percentage, fill = CongressApproval)) +
           geom_col(position = "fill") +
           labs(x = "Party ID", y = "Percentage", fill = "Congress Approval") +
-          ggtitle("Percentage Stacked Bar Chart of Media Trust and Party ID") +
+          ggtitle("Percentage Stacked Bar Chart of Congress Approval and Party ID") +
           theme_minimal()
 # PartyIDxPresidentApproval
 ggplot(PartyIDxPresidentApproval, aes(x = PartyID, y = percentage, fill = PresidentApproval)) +
