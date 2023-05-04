@@ -45,7 +45,12 @@ Scholar Sebastian Jilke in his article suggests that there is a "partisan bias" 
 Coppock, Alexander. 2017. “Did Shy Trump Supporter Bias the 2016 Polls? Evidence from a Nationally-representative List Experiment”. Statistics, Politics and Policy 8 (1): 29 - 40.
 https://www.degruyter.com/document/doi/10.1515/spp-2016-0005/htm
 
+Jilke, S. Citizen satisfaction under changing political leadership: The role of partisan motivated reasoning. Governance. 2018; 31: 515– 533. https://doi.org/10.1111/gove.12317
+
 Klar, Samara, Christopher R. Weber, & Yanna
 Krupnikov. 2016. “Social Desirability Bias in the 2016
 Presidential Election”. The Forum 14 (4): 433 - 443.
 https://www.degruyter.com/document/doi/10.1515/for-2016-0037/html?lang=de
+
+Orth, Taylor. 2022. “Two in five Americans say a civil war is at least somewhat likely in the next decade”. YouGovAmerica. Accessed on March 22nd, 2023.
+https://today.yougov.com/topics/politics/articles-reports/2022/08/26/two-in-five-americans-civil-war-somewhat-likely
