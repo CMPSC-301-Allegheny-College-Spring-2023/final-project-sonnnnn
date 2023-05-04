@@ -51,18 +51,34 @@ table(newanes$V201237) # how often can ppl trust others
 relevantdata <- subset(newanes, select = c(V201377,V201231x, V201033, V201124, V201127, V201237))
 
 # rename the variables
-names(relevantdata)[names(relevantdata) == 'V201377'] <- 'Media Trust'
-names(relevantdata)[names(relevantdata) == 'V201231x'] <- 'Party ID'
-names(relevantdata)[names(relevantdata) == 'V201033'] <- 'Presidential Candidate' 
-names(relevantdata)[names(relevantdata) == 'V201124'] <- 'Congress Approval' 
-names(relevantdata)[names(relevantdata) == 'V201127'] <- 'President Approval'
-names(relevantdata)[names(relevantdata) == 'V201237'] <- 'Trust among Citizens'
+names(relevantdata)[names(relevantdata) == 'V201377'] <- 'MediaTrust'
+names(relevantdata)[names(relevantdata) == 'V201231x'] <- 'PartyID'
+names(relevantdata)[names(relevantdata) == 'V201033'] <- 'PresidentialCandidate' 
+names(relevantdata)[names(relevantdata) == 'V201124'] <- 'CongressApproval' 
+names(relevantdata)[names(relevantdata) == 'V201127'] <- 'PresidentApproval'
+names(relevantdata)[names(relevantdata) == 'V201237'] <- 'TrustamongCitizens'
 
-# 
+# recode the data by getting ride of irrelevant responses and assign text values
+relevantdata$MediaTrust<-recode(as.numeric(relevantdata$MediaTrust),"-9:-8=NA")
+relevantdata$MediaTrust<-recode(relevantdata$MediaTrust,"1='None';2='A little';3='A moderate amount';4='A lot';5='A great deal'")
+relevantdata$PartyID<-recode(as.numeric(relevantdata$PartyID),"-9:-8=NA")
+relevantdata$PartyID<-recode(relevantdata$PartyID,"1='Strong Democrat'; 2='Democrat';3='Weak Democrat';4='Independent';5='Weak Republican';6='Republican';7='Strong Republican'")
+relevantdata$PresidentialCandidate<-recode(as.numeric(relevantdata$PresidentialCandidate),"-9:-8=NA;11:12=NA;-1=NA;4:5=3")
+relevantdata$PresidentialCandidate<-recode(relevantdata$PresidentialCandidate,"1='Joe Biden'; 2='Donald Trump';3='Other'")
+relevantdata$CongressApproval<-recode(as.numeric(relevantdata$CongressApproval),"-9:-8=NA")
+relevantdata$CongressApproval<-recode(relevantdata$CongressApproval,"1='Approve'; 2='Disapprove'")
+relevantdata$PresidentApproval<-recode(as.numeric(relevantdata$PresidentApproval),"-9:-8=NA")
+relevantdata$PresidentApproval<-recode(relevantdata$PresidentApproval,"1='Approve'; 2='Disapprove'")
+relevantdata$TrustamongCitizens<-recode(as.numeric(relevantdata$TrustamongCitizens),"-9:-8=NA")
+relevantdata$TrustamongCitizens<-recode(relevantdata$TrustamongCitizens,"1='Always';2='Most of the time';3='About half of the time';4='Some of the time';5='Never'")
+
+#
 
 
 
 
 
-##############################################
+
+
+#############################################
 
