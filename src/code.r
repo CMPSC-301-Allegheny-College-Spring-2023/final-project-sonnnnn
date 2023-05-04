@@ -75,6 +75,12 @@ relevantdata$TrustamongCitizens<-recode(relevantdata$TrustamongCitizens,"1='Alwa
 # removing the NA values
 relevantdata<-na.omit(relevantdata)
 
+# create order for variables so that charts look better
+relevantdata$PartyID<-factor(relevantdata$PartyID, levels = c("Strong Dem", "Dem", "Weak Dem", "Independent","Weak Rep","Rep","Strong Rep"))
+relevantdata$MediaTrust<-factor(relevantdata$MediaTrust, levels = c("A great deal","A lot","A moderate amount","A little","None"))
+relevantdata$TrustamongCitizens<-factor(relevantdata$TrustamongCitizens, levels = c("Always","Most of the time","About half of the time","Some of the time","Never"))
+relevantdata$PresidentialCandidate<-factor(relevantdata$PresidentialCandidate, levels = c("Other","Donald Trump","Joe Biden"))
+
 # group data into relevant cluster
 # MediaTrust and party ID
 PartyIDxMediaTrust <- relevantdata %>% 
@@ -101,5 +107,38 @@ PartyIDxTrustamongCitizens <- relevantdata %>%
      group_by(TrustamongCitizens, PartyID) %>% 
      summarise(count = n()) %>% 
      mutate(percentage = count / sum(count))
-##########################################
+
+# plots
+# PartyIDxMediaTrust
+ggplot(PartyIDxMediaTrust, aes(x = PartyID, y = percentage, fill = MediaTrust)) +
+     geom_col(position = "fill") +
+     labs(x = "Party ID", y = "Percentage", fill = "Media Trust") +
+     ggtitle("Percentage Stacked Bar Chart of Media Trust and Party ID") +
+     theme_minimal()
+# PartyIDxCongressApproval
+ggplot(PartyIDxCongressApproval, aes(x = PartyID, y = percentage, fill = CongressApproval)) +
+          geom_col(position = "fill") +
+          labs(x = "Party ID", y = "Percentage", fill = "Congress Approval") +
+          ggtitle("Percentage Stacked Bar Chart of Media Trust and Party ID") +
+          theme_minimal()
+# PartyIDxPresidentApproval
+ggplot(PartyIDxPresidentApproval, aes(x = PartyID, y = percentage, fill = PresidentApproval)) +
+     geom_col(position = "fill") +
+     labs(x = "Party ID", y = "Percentage", fill = "President Approval") +
+     ggtitle("Percentage Stacked Bar Chart of President Approval (Trump) and Party ID") +
+     theme_minimal()
+# PartyIDxPresidentialCandidate
+ggplot(PartyIDxPresidentialCandidate, aes(x = PartyID, y = percentage, fill = PresidentialCandidate)) +
+     geom_col(position = "fill") +
+     labs(x = "Party ID", y = "Percentage", fill = "Presidential Candidate") +
+     ggtitle("Percentage Stacked Bar Chart of Presidential Candidate and Party ID") +
+     theme_minimal()
+# PartyIDxTrustAmongCitizens
+ggplot(PartyIDxTrustamongCitizens, aes(x = PartyID, y = percentage, fill = TrustamongCitizens)) +
+     geom_col(position = "fill") +
+     labs(x = "Party ID", y = "Percentage", fill = "Trust Among Citizens") +
+     ggtitle("Percentage Stacked Bar Chart of Trust Among Citizens and Party ID") +
+     theme_minimal()
+#
+###################################
 
