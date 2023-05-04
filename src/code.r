@@ -62,7 +62,7 @@ names(relevantdata)[names(relevantdata) == 'V201237'] <- 'TrustamongCitizens'
 relevantdata$MediaTrust<-recode(as.numeric(relevantdata$MediaTrust),"-9:-8=NA")
 relevantdata$MediaTrust<-recode(relevantdata$MediaTrust,"1='None';2='A little';3='A moderate amount';4='A lot';5='A great deal'")
 relevantdata$PartyID<-recode(as.numeric(relevantdata$PartyID),"-9:-8=NA")
-relevantdata$PartyID<-recode(relevantdata$PartyID,"1='Strong Democrat'; 2='Democrat';3='Weak Democrat';4='Independent';5='Weak Republican';6='Republican';7='Strong Republican'")
+relevantdata$PartyID<-recode(relevantdata$PartyID,"1='Strong Dem'; 2='Dem';3='Weak Dem';4='Independent';5='Weak Rep';6='Rep';7='Strong Rep'")
 relevantdata$PresidentialCandidate<-recode(as.numeric(relevantdata$PresidentialCandidate),"-9:-8=NA;11:12=NA;-1=NA;4:5=3")
 relevantdata$PresidentialCandidate<-recode(relevantdata$PresidentialCandidate,"1='Joe Biden'; 2='Donald Trump';3='Other'")
 relevantdata$CongressApproval<-recode(as.numeric(relevantdata$CongressApproval),"-9:-8=NA")
@@ -72,13 +72,34 @@ relevantdata$PresidentApproval<-recode(relevantdata$PresidentApproval,"1='Approv
 relevantdata$TrustamongCitizens<-recode(as.numeric(relevantdata$TrustamongCitizens),"-9:-8=NA")
 relevantdata$TrustamongCitizens<-recode(relevantdata$TrustamongCitizens,"1='Always';2='Most of the time';3='About half of the time';4='Some of the time';5='Never'")
 
-#
+# removing the NA values
+relevantdata<-na.omit(relevantdata)
 
-
-
-
-
-
-
-#############################################
+# group data into relevant cluster
+# MediaTrust and party ID
+PartyIDxMediaTrust <- relevantdata %>% 
+     group_by(MediaTrust, PartyID) %>% 
+     summarise(count = n()) %>% 
+     mutate(percentage = count / sum(count))
+#PartyID and congress approval
+PartyIDxCongressApproval <- relevantdata %>% 
+     group_by(CongressApproval, PartyID) %>% 
+     summarise(count = n()) %>% 
+     mutate(percentage = count / sum(count))
+# PartyID and president approval
+PartyIDxPresidentApproval <- relevantdata %>% 
+     group_by(PresidentApproval, PartyID) %>% 
+     summarise(count = n()) %>% 
+     mutate(percentage = count / sum(count))
+# Party ID and presidential candidate
+PartyIDxPresidentialCandidate <- relevantdata %>% 
+     group_by(PresidentialCandidate, PartyID) %>% 
+     summarise(count = n()) %>% 
+     mutate(percentage = count / sum(count))
+# PartyID and trust among citizens
+PartyIDxTrustamongCitizens <- relevantdata %>% 
+     group_by(TrustamongCitizens, PartyID) %>% 
+     summarise(count = n()) %>% 
+     mutate(percentage = count / sum(count))
+##########################################
 
